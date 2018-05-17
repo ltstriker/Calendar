@@ -25569,18 +25569,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Users\\liyike622\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\administrator\\source\\repos\\Calendar\\Calendar\\Calendar.csproj",
+      "projectUniqueName": "D:\\project\\Calendar\\Calendar\\Calendar.csproj",
       "projectName": "Calendar",
-      "projectPath": "c:\\users\\administrator\\source\\repos\\Calendar\\Calendar\\Calendar.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\administrator\\source\\repos\\Calendar\\Calendar\\obj\\",
+      "projectPath": "D:\\project\\Calendar\\Calendar\\Calendar.csproj",
+      "packagesPath": "C:\\Users\\liyike622\\.nuget\\packages\\",
+      "outputPath": "D:\\project\\Calendar\\Calendar\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -25588,7 +25588,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\liyike622\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
