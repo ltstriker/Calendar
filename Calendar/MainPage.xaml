@@ -10,7 +10,7 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <Style x:Name="GridViewItemNoneStyle" TargetType="GridViewItem">
+ <!--           <Style x:Name="GridViewItemNoneStyle" TargetType="GridViewItem">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewItem">
@@ -21,25 +21,25 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            -->
         </ResourceDictionary>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+<!--            <RowDefinition Height="50"/> -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Name="AccountAndWeather" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <AppBarButton Icon="People" Grid.Column="0"/>
             <TextBlock Name="userName" Text="liping" Grid.Column="1" VerticalAlignment="Center"/>
-            <AppBarButton Icon="Clock" Grid.Column="2" HorizontalAlignment="Right"/>
+            <!--  <AppBarButton Icon="Clock" Grid.Column="2" HorizontalAlignment="Right"/> -->
         </Grid>
-        <Grid Name="Tools" Grid.Row="1">
+ <!--       <Grid Name="Tools" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
@@ -53,16 +53,23 @@
             <AppBarButton Icon="Send" Grid.Column="3"/>
             <AppBarButton Icon="Help" Grid.Column="4"/>
         </Grid>
-        <Grid Name="Data" Grid.Row="2">
+-->
+        <Grid Name="Data" Grid.Row="1">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="1"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Grid Name="list" Grid.Column="0">
+
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
                 <Grid Name="searchGrid" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -71,30 +78,26 @@
                     <TextBox Name="searchBox" Grid.Column="0"/>
                     <AppBarButton Icon="Find" Grid.Column="1"/>
                 </Grid>
-                <Grid Name="listGrid" Grid.Row="1">
 
+                <AppBarButton Grid.Row="1" Content="新建组" Margin="25, 0, 0 ,0 "/>
+
+                <Grid Name="listGrid" Grid.Row="2">
                     <ListView Name="listview1" ItemsSource="{x:Bind view,Mode=OneWay}"  ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
-
                         <ListView.ItemTemplate>
-
                             <DataTemplate x:DataType="md:Group">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50"/>
-                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
+
                                     <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="20"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <AppBarButton Grid.Column="0" Width="100" Name="addButton" Background="Transparent" Click="AppBarButton_Click" Content="{x:Bind openFlag,Mode=OneWay}" HorizontalAlignment="Stretch"/>
-                                        <AppBarButton Grid.Column="1"  Content="{x:Bind listName,Mode=OneWay}" Width="500" Click="AppBarButton_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                                        <!-- <Button Content="未完成列表" Width="100" Click="List_Show" Background="Transparent" Style="{StaticResource TransparentPathIconButtonStyle}"/>                                        
+                                        <AppBarButton Grid.Column="0" Width="100" Name="addButton" Background="Transparent" Click="List_Show" Content="{x:Bind openFlag,Mode=OneWay}"/>  -->
+                                        <AppBarButton Grid.Column="1"  Content="{x:Bind listName,Mode=OneWay}" Click="List_Show"  Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
                                     </Grid>
 
-                                    <ListView Grid.Row="1" ItemsSource="{x:Bind itemList,Mode=OneWay}" Visibility="{x:Bind Vis,Mode=TwoWay}">
-
-
+                                    <ListView Grid.Row="1" ItemsSource="{x:Bind itemList,Mode=OneWay}" Visibility="{x:Bind Vis,Mode=TwoWay}" ItemClick="Show_Detail" IsItemClickEnabled="True">
                                         <ListView.ItemTemplate>
                                             <DataTemplate x:DataType="md:TodoItem">
                                                 <Grid>
@@ -108,7 +111,6 @@
                                                 </Grid>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
-
                                     </ListView>
                                 </Grid>
                             </DataTemplate>
@@ -117,8 +119,31 @@
 
                 </Grid>
             </Grid>
-            <Grid Name="content" Grid.Column="1">
-
+            <Line Grid.Column="1" X1="0" X2="0" Y1="0" Y2="800" Stroke="Black" StrokeThickness="1"/>
+            <Grid Name="content" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Title: " Margin="5, 0, 0 ,0"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Name: " Margin="5, 0, 0 ,0"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Date: " Margin="5, 0, 0 ,0"/>
+                <TextBox x:Name="title" Grid.Column="1" Grid.Row="0" Text="" Height="20" Width="400" VerticalAlignment="Top" Margin="10, 0, 0 ,0"/>
+                <TextBox x:Name="name" Grid.Column="1" Grid.Row="1" Text="liping" Height="20" Width="400" VerticalAlignment="Top" Margin="10, 0, 0 ,0"/>
+                <DatePicker x:Name="date" Grid.Column="1" Grid.Row="2" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0, 0, 0" Grid.ColumnSpan="2" Height="32"/>
+                <AppBarButton x:Name="delete" Grid.Column="2" Grid.Row="0" Icon="Delete" HorizontalAlignment="Center"/>
+                <AppBarButton x:Name="add" Grid.Column="2" Grid.Row="1" Icon="Add" HorizontalAlignment="Center"/>
+                <AppBarButton x:Name="share" Grid.Column="2" Grid.Row="2" Icon="Share" HorizontalAlignment="Center"/>
+                <Line Grid.ColumnSpan="3" Grid.Row="3" X1="0" X2="600" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1" />
+                <TextBox x:Name="detail" Grid.ColumnSpan="3" Grid.Row="4" TextWrapping="Wrap" Height="410" AcceptsReturn="True"/>
             </Grid>
         </Grid>
     </Grid>

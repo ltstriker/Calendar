@@ -1,1 +1,1 @@
-c:\users\administrator\source\repos\Calendar\Calendar\Calendar.csproj;x86
+D:\project\Calendar\Calendar\Calendar.csproj;x86
