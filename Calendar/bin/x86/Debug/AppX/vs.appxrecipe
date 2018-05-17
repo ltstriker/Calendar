@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>0F63B60074AD18B57A78F38698326F6436ED171AD884139C7E16CF3B62B8D818</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>D8DED7ACA7D565F3B321AF4EE23E010B9370CD80580B8A9A27AE93BD24F0CD32</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>7a1317ed-8051-438b-91f6-3d431d2da70e_1.0.0.0_x86__75cr2b68sm664</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>7a1317ed-8051-438b-91f6-3d431d2da70e_75cr2b68sm664!App</RegisteredUserModeAppID>
     <RegisteredPackageID>7a1317ed-8051-438b-91f6-3d431d2da70e</RegisteredPackageID>
@@ -31,13 +31,13 @@
     <AppXManifest Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-05-15T15:07:50.576</Modified>
+      <Modified>2018-05-17T04:26:40.535</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\Calendar.exe">
       <PackagePath>entrypoint\Calendar.exe</PackagePath>
-      <Modified>2018-05-15T15:07:49.077</Modified>
+      <Modified>2018-05-17T04:26:39.447</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Administrator\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -535,20 +535,20 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\Calendar.xr.xml">
       <PackagePath>Calendar.xr.xml</PackagePath>
-      <Modified>2018-05-15T15:07:48.826</Modified>
+      <Modified>2018-05-17T04:26:39.256</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.16299.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2018-03-09T17:13:55.416</Modified>
+      <Modified>2017-11-10T10:15:50.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-05-15T15:07:50.201</Modified>
+      <Modified>2018-05-17T04:26:40.273</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\Core\Calendar.exe">
       <PackagePath>Calendar.exe</PackagePath>
-      <Modified>2018-05-15T15:07:50.567</Modified>
+      <Modified>2018-05-17T04:26:40.529</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

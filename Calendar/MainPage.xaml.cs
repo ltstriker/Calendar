@@ -69,5 +69,14 @@ namespace Calendar
         {
             // Debug.WriteLine((listview1.SelectedItem as Group).listName);
         }
+
+        private void SignInClick(object sender, RoutedEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(SigninPage));
+        }
+        private void LogoutClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

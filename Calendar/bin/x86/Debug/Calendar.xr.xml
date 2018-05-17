@@ -64,6 +64,12 @@
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="Name" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="Foreground" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.AppBarButton">
       <RootProperty Name="Name" />
@@ -73,11 +79,63 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="HorizontalContentAlignment" />
       <RootProperty Name="Icon" />
+      <RootProperty Name="Flyout" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Name" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="PlaceholderText" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+      <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Calendar.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Content" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="FontSize" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="PlaceholderText" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
+    <RootType FullName="Calendar.SigninPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBoxItem">
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Calendar.SignupPage" />
   </Roots.RootTypes>
 </Roots>

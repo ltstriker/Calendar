@@ -214,3 +214,13 @@ c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\MultipleQual
 c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\resources.en-us.resfiles
 c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\resources.en-us.resfiles.intermediate
 c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\ProjectArchitectures.txt
+c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\SigninPage.xbf
+c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\SignupPage.xbf
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SigninPage.g.i.cs
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SigninPage.g.cs
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SignupPage.g.i.cs
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SignupPage.g.cs
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SigninPage.xaml
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SignupPage.xaml
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SigninPage.xbf
+c:\users\administrator\source\repos\Calendar\Calendar\obj\x86\Debug\SignupPage.xbf

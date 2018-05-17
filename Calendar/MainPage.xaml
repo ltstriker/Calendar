@@ -35,7 +35,18 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <AppBarButton Icon="People" Grid.Column="0"/>
+            <AppBarButton Icon="People" Grid.Column="0">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Sign in" Click="SignInClick">
+
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Log out" Click="LogoutClick">
+
+                        </MenuFlyoutItem>
+                        </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
             <TextBlock Name="userName" Text="liping" Grid.Column="1" VerticalAlignment="Center"/>
             <AppBarButton Icon="Clock" Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>

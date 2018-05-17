@@ -403,7 +403,7 @@
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\Calendar.xr.xml">
       <PackagePath>Calendar.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.16299.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="c:\users\administrator\source\repos\Calendar\Calendar\bin\x86\Debug\resources.pri">
