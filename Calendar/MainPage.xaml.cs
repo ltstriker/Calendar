@@ -28,6 +28,8 @@ namespace Calendar
         public ObservableCollection<TodoItem> future;
         public ObservableCollection<Group> view;
         public Visibility finishedVisible = Visibility.Collapsed;
+        public TodoItem current_one;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -37,10 +39,10 @@ namespace Calendar
         {
             finished = new ObservableCollection<TodoItem>();
             future = new ObservableCollection<TodoItem>();
-            finished.Add(new TodoItem("finished1", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            finished.Add(new TodoItem("finished2", null, new DateTimeOffset(2018, 5, DateTimeOffset.Now.Day - 1, 11, 11, 11, TimeSpan.Zero), null, null));
-            future.Add(new TodoItem("future1", null, DateTimeOffset.Now, null, null));
-            future.Add(new TodoItem("future2", null, DateTimeOffset.Now, null, null));
+            finished.Add(new TodoItem("finished1", "李平是傻逼", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            finished.Add(new TodoItem("finished2", "李平是傻逼+1", new DateTimeOffset(2018, 5, DateTimeOffset.Now.Day - 1, 11, 11, 11, TimeSpan.Zero), null, null));
+            future.Add(new TodoItem("future1", "李平是傻逼-1", DateTimeOffset.Now, null, null));
+            future.Add(new TodoItem("future2", "李平是傻逼+10086", DateTimeOffset.Now, null, null));
             view = new ObservableCollection<Group>();
             var fir = new Group(finished);
             fir.listName = "finished";
@@ -49,11 +51,12 @@ namespace Calendar
             //  fir.Vis=*/
             view.Add(fir);
             view.Add(sec);
+            date.Date = DateTime.Now;
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private void List_Show(object sender, RoutedEventArgs e)
         {
-            var itemlist = (((sender as AppBarButton).DataContext) as Group);
+            var itemlist = (((sender as Button).DataContext) as Group);
 
             itemlist.Vis = itemlist.Vis == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
 
@@ -65,9 +68,18 @@ namespace Calendar
 
         }
 
+
+        private void Show_Detail(object sender, ItemClickEventArgs e)
+        {
+            current_one = e.ClickedItem as TodoItem;
+            title.Text = current_one.Title;
+            date.Date = current_one.Date;
+            detail.Text = current_one.Description;
+
+        }
+
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // Debug.WriteLine((listview1.SelectedItem as Group).listName);
         }
     }
 }
