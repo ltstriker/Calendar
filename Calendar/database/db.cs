@@ -1,10 +1,29 @@
-﻿using SQLitePCL;
+﻿using Calendar.Models;
+using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+//要使用该类则使用Db.GetInstance()获得实例进行操作
+//获取name的所有日程
+//ObservableCollection<Models.TodoItem> GetAll(string name)
+//插入日程
+//Boolean Insert(string name, string id, string title, string content, DateTimeOffset date, string imageString)
+//删除日程
+//Boolean Remove(string name, string id)
+//更新日程
+//Boolean Update(string name, string id, string title, string content, DateTimeOffset date, string imageString)
+//改变日程完成程度
+//Boolean Complete(string name, string id, bool finish)
+//搜索日程，返回搜索结果字符串
+//string Search(string name, string str)
+//尝试注册
+//Boolean Register(string name,string pwd,long root)
+//获取登陆用信息，不存在返回空
+//UserItem Login(string name)
 
 namespace Calendar.database
 {
@@ -32,7 +51,8 @@ namespace Calendar.database
             conn = new SQLiteConnection("Todo.db");
             string sql = @"CREATE TABLE IF NOT EXISTS user (
                     name   VARCHAR( 20  ) PRIMARY KEY NOT NULL,
-                    pwd        VARCHAR(20)
+                    pwd    VARCHAR(20),
+                    root    INTEGER
                     );";
             using (var statement = conn.Prepare(sql))
             { statement.Step(); }
@@ -52,14 +72,15 @@ namespace Calendar.database
             { statement.Step(); }
         }
 
-        public ObservableCollection<Models.TodoItem> GetAll()
+        public ObservableCollection<Models.TodoItem> GetAll(string name)
         {
             var db = this.conn;
             var view = new ObservableCollection<Models.TodoItem>();
             try
             {
-                using (var statement = db.Prepare("SELECT * FROM item"))
+                using (var statement = db.Prepare("SELECT * FROM item where name = ?"))
                 {
+                    statement.Bind(1, name);
                     while (statement.Step() == SQLiteResult.ROW)
                     {
                         var temp = ((string)statement[4]).Split('/');
@@ -79,7 +100,7 @@ namespace Calendar.database
             }
         }
 
-        public void Insert(string name, string id, string title, string content, string date, string imageString)
+        public Boolean Insert(string name, string id, string title, string content, DateTimeOffset date, string imageString)
         {
             // SqlConnection was opened in App.xaml.cs and exposed through property conn
             var db = this.conn;
@@ -90,17 +111,19 @@ namespace Calendar.database
                     sql.Bind(1, id);
                     sql.Bind(2, title);
                     sql.Bind(3, content);
-                    sql.Bind(4, date);
+                    sql.Bind(4, date.Month.ToString()+'/'+date.Day.ToString()+'/'+date.Year.ToString());
                     sql.Bind(5, imageString);
                     sql.Bind(6, -1);
                     sql.Step();
                 }
+                return true;
             }catch (Exception ex){
                 // TODO: Handle error
+                return false;
             }
         }
 
-        public void Remove(string name, string id)
+        public Boolean Remove(string name, string id)
         {
             // SqlConnection was opened in App.xaml.cs and exposed through property conn
             var db = this.conn;
@@ -112,14 +135,16 @@ namespace Calendar.database
                     statement.Bind(2, name);
                     statement.Step();
                 }
+                return true;
             }
             catch (Exception ex)
             {
-                // TODO: Handle error
+                // TODO: Handle error
+                return false;
             }
         }
 
-        public void Update(string name, string id, string title, string content, string date, string imageString)
+        public Boolean Update(string name, string id, string title, string content, DateTimeOffset date, string imageString)
         {
             var db = this.conn;
             try
@@ -128,20 +153,22 @@ namespace Calendar.database
                 {
                     statement.Bind(1, title);
                     statement.Bind(2, content);
-                    statement.Bind(3, date);
+                    statement.Bind(3, date.Month.ToString() + '/' + date.Day.ToString() + '/' + date.Year.ToString());
                     statement.Bind(4, imageString);
                     statement.Bind(5, id);
                     statement.Bind(6, name);
                     statement.Step();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
-                // TODO: Handle error
+                // TODO: Handle error
+                return false;
             }
         }
 
-        public void Complete(string name, string id, bool finish)
+        public Boolean Complete(string name, string id, bool finish)
         {
             var db = this.conn;
             try
@@ -153,10 +180,12 @@ namespace Calendar.database
                     statement.Bind(3, name);
                     statement.Step();
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 // TODO: Handle error
+                return false;
             }
         }
 
@@ -166,7 +195,7 @@ namespace Calendar.database
             StringBuilder msg = new StringBuilder();
 
             try
-            {//UPDATE Customer SET Name = ?, City = ?, Contact = ? WHERE  name like ‘%values%
+            {
                 int count = 0;
                 using (var statement = db.Prepare("SELECT * FROM item WHERE name = ? AND (title LIKE ? OR content LIKE ? OR date LIKE ?)"))
                 {
@@ -191,17 +220,17 @@ namespace Calendar.database
             return msg.ToString();
         }
 
-        public Boolean Register(string name,string pwd)
+        public Boolean Register(string name,string pwd,long root)
         {
             var db = this.conn;
             try
             {
                 using (
-                var sql = db.Prepare("INSERT INTO user (name, pwd) VALUES (?, ?)"))
+                var sql = db.Prepare("INSERT INTO user (name, pwd,root) VALUES (?, ?, ?)"))
                 {
                     sql.Bind(1, name);
-                    sql.Bind(1, pwd);
-                    sql.Bind(6, -1);
+                    sql.Bind(2, pwd);
+                    sql.Bind(3, root);
                     sql.Step();
                 }
                 return true;
@@ -213,30 +242,29 @@ namespace Calendar.database
             }
         }
 
-        public Arraylist<> Login(string name)
+        public UserItem Login(string name)
         {
             var db = this.conn;
 
             try
             {
-                using (var statement = db.Prepare("SELECT * FROM item WHERE name = ? AND pwd = ?"))
+                using (var statement = db.Prepare("SELECT * FROM user WHERE name = ?"))
                 {
                     statement.Bind(1, name);
-                    statement.Bind(2, pwd);
                     if (statement.Step() == SQLiteResult.ROW)
                     {
-                        return true;
+                        return new UserItem((string)statement[0],(string)statement[1],(long)statement[2]);
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
             }
             catch (Exception ex)
             {
                 // TODO: Handle error
-                return false;
+                return null;
             }
         }
 
