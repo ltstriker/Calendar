@@ -49,6 +49,9 @@ namespace Calendar
             {
                 return;
             }
+
+            // insert to database
+            Frame.Navigate(typeof(SigninPage), "");
         }
         
         private bool checkFormat(string username, string password, string password_repeat)

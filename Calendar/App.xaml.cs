@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calendar.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,10 +27,18 @@ namespace Calendar
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
         /// </summary>
+         
+        public static bool isLogin { get; set; }
+        public static UserItem loginUser;
+
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // default
+            isLogin = false;
+            loginUser = null;
         }
 
         /// <summary>
@@ -66,7 +75,7 @@ namespace Calendar
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(SigninPage), e.Arguments);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
