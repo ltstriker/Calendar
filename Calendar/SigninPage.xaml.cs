@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calendar.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,19 @@ namespace Calendar
             if (!checkFormat(username, password)) {
                 return;
             }
+
+            // check whether the user exist
+
+            // check whether the password is correct
+
+            UserItem user = new UserItem(username, password, root);
+            // set the state to login
+            App.isLogin = true;
+            App.loginUser = user;
+
+
+            // jump to mainpage
+            Frame.Navigate(typeof(MainPage), "");
         }
 
         // 检查用户信息格式
