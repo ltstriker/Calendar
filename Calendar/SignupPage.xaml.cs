@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Calendar.database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,11 @@ namespace Calendar
         // 处理注册的用户信息
         private void SignupButton_Click(object sender, RoutedEventArgs e)
         {
+            // Clear Error
+            UsernameError.Text = "";
+            PasswordError.Text = "";
+            PasswordRepeatError.Text = "";
+
             // Get Message
             string username = InputUsername.Text;
             string password = InputPassword.Password;
@@ -51,6 +58,13 @@ namespace Calendar
             }
 
             // insert to database
+            // Fail
+            if (!Db.GetInstance().Register(username, password, root))
+            {
+                var m = new MessageDialog("用户名已存在").ShowAsync();
+            }
+
+            // jump to SigninPage
             Frame.Navigate(typeof(SigninPage), "");
         }
         

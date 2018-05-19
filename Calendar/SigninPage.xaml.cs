@@ -1,4 +1,5 @@
-﻿using Calendar.Models;
+﻿using Calendar.database;
+using Calendar.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +32,10 @@ namespace Calendar
         // 处理登录事件
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            // Clear the Error
+            UsernameError.Text = "";
+            Password.Text = "";
+
             string username = InputUsername.Text;
             string password = InputPassword.Password;
 
@@ -40,13 +45,27 @@ namespace Calendar
             }
 
             // check whether the user exist
-
+            var flag =  Db.GetInstance().Login(username);
+            // user is not found
+            if (flag == null)
+            {
+                //var m = new MessageDialog("用户不存在").ShowAsync();
+                UsernameError.Text = "用户不存在";
+            }
+            else
+            {
+                // 密码不正确
+                if (flag.password != password)
+                {
+                    PasswordError.Text = "密码错误";
+                }
+            }
             // check whether the password is correct
 
-            UserItem user = new UserItem(username, password, root);
+            //UserItem user = new UserItem(username, password, root);
             // set the state to login
             App.isLogin = true;
-            App.loginUser = user;
+            App.loginUser = flag;
 
 
             // jump to mainpage
