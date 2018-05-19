@@ -87,7 +87,7 @@ namespace Calendar.database
                         var date1 = new DateTime(int.Parse(temp[2]), int.Parse(temp[0]), int.Parse(temp[1]));
                         var date = new DateTimeOffset(date1);
                         //TodoItem(string title, string description, DateTimeOffset date,string uri,string id_ = null)
-                        var titem = new TodoItem((string)statement[2], (string)statement[3], date, (string)statement[5], (string)statement[0], (string)statement[6]);
+                        var titem = new TodoItem((string)statement[2], (string)statement[3], date, (string)statement[5], (string)statement[0], ((Int64)statement[6]) == Int64.Parse("1") ? true : false);
                         view.Add(titem);
                     }
                 }
