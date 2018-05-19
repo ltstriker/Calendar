@@ -9,9 +9,8 @@ namespace Calendar.Models
 {
     public class TodoItem : INotifyPropertyChanged
     {
-        public static string TokenEmpty = "";
+        
         private string id;
-        private static string seperator = "seperateAmongElement";
         public Visibility Vis
         {
             get
@@ -94,19 +93,30 @@ namespace Calendar.Models
                 }
             }
         }
-        public string imageFileName { get; set; }
         public string uriPath { get; set; } = "ms-appx:///Assets/init.png";
-        public TodoItem(string title, string description, DateTimeOffset date, ImageSource _imageSource, string image_token)
+        public TodoItem(string title, string description, DateTimeOffset date,string uri,string id_ = null)
         {
-            imageFileName = image_token;
-            if (imageFileName == null)
+          
+            if (uri == null || uri == "")
             {
-                imageFileName = "ms-appx:///Assets/init.png";
+                //do nothind
             }
-            Uri uri = new Uri(imageFileName);
-            BitmapImage localImageSource = new BitmapImage(uri);
-            this.ImageSource_ = localImageSource;
-            id = Guid.NewGuid().ToString("N");
+            else
+            {
+                uriPath = uri;
+                
+            }
+            ImageSource_ = new BitmapImage(new Uri(uriPath));
+
+            if (id_ == null) {
+                id = Guid.NewGuid().ToString("N");
+            }
+
+            else
+            {
+                id = id_;
+            }
+               
             this.Title = title;
             this.Description = description;
             Completed = false;
