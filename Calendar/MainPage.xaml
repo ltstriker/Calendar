@@ -88,8 +88,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <AppBarButton Grid.Column="0" Width="100" Name="addButton" Background="Transparent" Click="AppBarButton_Click" Content="{x:Bind openFlag,Mode=OneWay}" HorizontalAlignment="Stretch"/>
-                                        <AppBarButton Grid.Column="1"  Content="{x:Bind listName,Mode=OneWay}" Width="500" Click="AppBarButton_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                                        <AppBarButton Grid.Column="0" Width="20" Name="addButton" Background="Transparent" Click="AppBarButton_Click" Content="{x:Bind openFlag,Mode=OneWay}" HorizontalAlignment="Stretch"/>
+                                        <AppBarButton Grid.Column="1"  Width="200" Content="{x:Bind listName,Mode=OneWay}"  Click="AppBarButton_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
                                     </Grid>
 
                                     <ListView Grid.Row="1" ItemsSource="{x:Bind itemList,Mode=OneWay}" Visibility="{x:Bind Vis,Mode=TwoWay}">

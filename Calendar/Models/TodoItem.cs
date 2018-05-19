@@ -11,7 +11,6 @@ namespace Calendar.Models
     {
         public static string TokenEmpty = "";
         private string id;
-        private static string seperator = "seperateAmongElement";
         public Visibility Vis
         {
             get
