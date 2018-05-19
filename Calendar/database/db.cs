@@ -86,9 +86,9 @@ namespace Calendar.database
                         var temp = ((string)statement[4]).Split('/');
                         var date1 = new DateTime(int.Parse(temp[2]), int.Parse(temp[0]), int.Parse(temp[1]));
                         var date = new DateTimeOffset(date1);
-                        //TodoItem(string title, string description, DateTimeOffset date, ImageSource _imageSource, string image_token)
-                        //var titem = new Models.TodoItem((string)statement[2], (string)statement[3]), date, (string)statement[5]
-                        //view.Add(titem);
+                        //TodoItem(string title, string description, DateTimeOffset date,string uri,string id_ = null)
+                        var titem = new TodoItem((string)statement[2], (string)statement[3], date, (string)statement[5], (string)statement[0], (string)statement[6]);
+                        view.Add(titem);
                     }
                 }
                 return view;
