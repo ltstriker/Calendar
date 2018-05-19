@@ -73,7 +73,7 @@
                 </Grid>
                 <Grid Name="listGrid" Grid.Row="1">
 
-                    <ListView Name="listview1" ItemsSource="{x:Bind view,Mode=OneWay}"  ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
+                    <ListView Name="listview1" ItemsSource="{x:Bind SingleView.GroupList,Mode=OneWay}"  ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
 
                         <ListView.ItemTemplate>
 
@@ -103,6 +103,7 @@
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="80"/>
                                                     </Grid.ColumnDefinitions>
+                                                    
                                                     <TextBlock Grid.Column="0" Text="{x:Bind Title}" HorizontalAlignment="Left" TextAlignment="Left"/>
                                                     <TextBlock Grid.Column="2" Text="{x:Bind FormatTime}" TextAlignment="Right"/>
                                                 </Grid>
