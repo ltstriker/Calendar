@@ -21,10 +21,10 @@ namespace Calendar.ViewModels
 
         private void init()
         {
-            Future.itemList.Add(new TodoItem("Future", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Future.itemList.Add(new TodoItem("Future1", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Finished.itemList.Add(new TodoItem("finished1", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Finished.itemList.Add(new TodoItem("finished2", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Future.itemList.Add(new TodoItem("Future", "1", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Future.itemList.Add(new TodoItem("Future1", "2", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Finished.itemList.Add(new TodoItem("finished1", "3", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Finished.itemList.Add(new TodoItem("finished2", "4", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Future.listName = "future";
             Finished.listName = "finished";
         }
