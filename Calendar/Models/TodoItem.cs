@@ -91,16 +91,19 @@ namespace Calendar.Models
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("ImageSource_"));
                 }
+                
             }
         }
         public string uriPath { get; set; } = "ms-appx:///Assets/init.png";
-        public TodoItem(string title, string description, DateTimeOffset date,string uri,string id_ = null)
+        public TodoItem(string title, string description, DateTimeOffset date,string uri,string id_=null,bool finished = false)
         {
-          
+            
+
             if (uri == null || uri == "")
             {
                 //do nothind
             }
+
             else
             {
                 uriPath = uri;
@@ -108,7 +111,8 @@ namespace Calendar.Models
             }
             ImageSource_ = new BitmapImage(new Uri(uriPath));
 
-            if (id_ == null) {
+            //
+            if (id_ == null||id.Length < 10) {
                 id = Guid.NewGuid().ToString("N");
             }
 
@@ -119,7 +123,9 @@ namespace Calendar.Models
                
             this.Title = title;
             this.Description = description;
-            Completed = false;
+            
+            Completed = finished;
+
             this.Date = date;
         }
         public event PropertyChangedEventHandler PropertyChanged;

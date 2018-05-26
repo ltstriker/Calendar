@@ -35,6 +35,7 @@ namespace Calendar
         public void initList()
         {
             SingleView = View.SingleView;
+            
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
