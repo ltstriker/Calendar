@@ -23,9 +23,13 @@ namespace Calendar
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
+    /// 
+        
     public sealed partial class MainPage : Page
     {
         public View SingleView;
+        bool Update_flag = false;
+
         public MainPage()
         {
             initList();
@@ -54,7 +58,42 @@ namespace Calendar
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // Debug.WriteLine((listview1.SelectedItem as Group).listName);
+
+        }
+
+        private void Delete_Event(object sender, RoutedEventArgs e)
+        {
+            //delete
+        }
+
+        private void Add_Or_Update_Event(object sender, RoutedEventArgs e)
+        {
+            if (Update_flag)
+            {
+                //update
+            }
+            else {
+                //add
+            }
+        }
+
+        private void Share_Event(object sender, RoutedEventArgs e)
+        {
+            //share
+        }
+
+        private void Show_Detail(object sender, ItemClickEventArgs e)
+        {
+            var one = e.ClickedItem as TodoItem;
+            title.Text = one.Title;
+            date.Date = one.Date;
+            detail.Text = one.Description;
+            Update_flag = true;
+        }
+
+        private void Search_Event(object sender, RoutedEventArgs e)
+        {
+            //search
         }
     }
 }
