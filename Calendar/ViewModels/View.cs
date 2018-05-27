@@ -13,7 +13,7 @@ namespace Calendar.ViewModels
         private  static View instance;
         private Group future;
         private Group finished;
-        
+        private TodoItem selectedItem;
         private View()
         {
             init();
@@ -47,6 +47,11 @@ namespace Calendar.ViewModels
                 return view;
             }
         }
+        public TodoItem SelectedItem {
+            set { selectedItem = value; }
+            get { return selectedItem; }
+        }
+
         public static View SingleView
         {
             set
@@ -104,6 +109,32 @@ namespace Calendar.ViewModels
             {
 
             }
+        }
+        public void Remove(TodoItem todo)
+        {
+            Finished.itemList.Remove(todo);
+            Future.itemList.Remove(todo);
+        }
+        public void Add(TodoItem todo)
+        {
+            if(todo.Completed == true)
+            {
+                Finished.itemList.Add(todo);
+            }
+            else
+            {
+                Future.itemList.Add(todo);
+            }
+        }
+        public void Update(string title,string detail,DateTimeOffset date,string imgUri = null)
+        {
+            if (SelectedItem == null)
+                return;
+            if (imgUri != null)
+                selectedItem.uriPath = imgUri;
+            SelectedItem.Date = date;
+            SelectedItem.Title = title;
+            SelectedItem.Description = detail;
         }
     }
 }

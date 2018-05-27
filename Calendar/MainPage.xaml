@@ -35,7 +35,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <AppBarButton Icon="People" Grid.Column="0"/>
+            <AppBarButton Icon="People" Grid.Column="0">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="sign in" Click="SignIn_Click"/>
+                        <MenuFlyoutItem Text="log out" Click="LogOut_Click"/>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
             <TextBlock Name="userName" Text="liping" Grid.Column="1" VerticalAlignment="Center"/>
             <AppBarButton Icon="Clock" Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
@@ -142,7 +149,7 @@
 
                 <AppBarButton x:Name="delete" Grid.Column="2" Grid.Row="0" Icon="Delete" HorizontalAlignment="Center" Click="Delete_Event"/>
                 <Button x:Name="add" Grid.Column="2" Grid.Row="1" Content="+" HorizontalAlignment="Center" Click="Add_Or_Update_Event"/>
-                <AppBarButton x:Name="share" Grid.Column="2" Grid.Row="2" Icon="Share" HorizontalAlignment="Center" Click="Share_Event"/>
+                <AppBarButton x:Name="share" Grid.Column="2" Grid.Row="2" Icon="Send" HorizontalAlignment="Center" Click="Share_Event"/>
 
                 <Line Grid.ColumnSpan="3" Grid.Row="3" X1="0" X2="600" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1" />
                 <TextBox BorderThickness="0, 0, 0 ,0" x:Name="detail" Grid.ColumnSpan="3" Grid.Row="4" TextWrapping="Wrap" Height="410" AcceptsReturn="True"/>
