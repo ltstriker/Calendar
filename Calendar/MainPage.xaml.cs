@@ -94,5 +94,16 @@ namespace Calendar
         {
             //search
         }
+
+        private void Add_Or_Delete(object sender, RoutedEventArgs e)
+        {
+            var button = sender as AppBarButton;
+            if ((string)button.Content == "Add a New Event")
+            {
+                
+            }
+            else if ((string)button.Content == "Delete All Event")
+            { }
+        }
     }
 }

@@ -26,7 +26,9 @@ namespace Calendar.ViewModels
             Finished.itemList.Add(new TodoItem("finished1", "3", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Finished.itemList.Add(new TodoItem("finished2", "4", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Future.listName = "future";
+            Future.EventName = "Add a New Event";
             Finished.listName = "finished";
+            Finished.EventName = "Delete All Event";
         }
         public static View getInstance()
         {

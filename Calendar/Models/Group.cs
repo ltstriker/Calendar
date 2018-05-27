@@ -9,6 +9,11 @@ namespace Calendar.Models
         public ObservableCollection<TodoItem> itemList = new ObservableCollection<TodoItem>();
         public string listName;
         private Visibility vis;
+        public int all_item = 0;
+
+        public string EventName;
+
+
         public Visibility Vis
         {
             set
