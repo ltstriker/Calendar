@@ -102,6 +102,7 @@ namespace Calendar.Models
             if (uri == null || uri == "")
             {
                 //do nothind
+                uriPath = "ms-appx:///Assets/init.png";
             }
 
             else
