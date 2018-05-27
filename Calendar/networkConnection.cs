@@ -8,7 +8,7 @@ using Windows.Data.Xml.Dom;
 namespace Calendar.network
 {
     //还是单例模式，getConnection拿实例，然后getConnectToGetWeatherAsync根据城市名称获取天气
-    public class networkConnection
+    class networkConnection
     {
         private static networkConnection ins;
         private networkConnection()
