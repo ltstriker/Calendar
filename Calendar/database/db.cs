@@ -64,7 +64,7 @@ namespace Calendar.database
                     date    VARCHAR( 140 ),
                     image   VARCHAR( 140 ),
                     finish  INTEGER,
-                    PRIMARY KEY(uid, id),
+                    PRIMARY KEY(name, id),
                     FOREIGN KEY(name) REFERENCES user(name)
                     ON DELETE CASCADE
                     );";
@@ -116,6 +116,7 @@ namespace Calendar.database
                     sql.Bind(6, -1);
                     sql.Step();
                 }
+                Background.BackgroundTask.getInstance().AddClock(id, title, content, imageString, date);
                 return true;
             }catch (Exception ex){
                 // TODO: Handle error
@@ -135,6 +136,7 @@ namespace Calendar.database
                     statement.Bind(2, name);
                     statement.Step();
                 }
+                Background.BackgroundTask.getInstance().DeleteClock(id);
                 return true;
             }
             catch (Exception ex)
