@@ -25,6 +25,29 @@ namespace Calendar.Controls.ListButton
             set { SetValue(CountProperty, value); }
         }
 
-        public static readonly DependencyProperty CountProperty = DependencyProperty.Register("Count", typeof(string), typeof(ListButton), new PropertyMetadata("0", null));
+        public static readonly DependencyProperty CountProperty = DependencyProperty.Register("Count", typeof(string), typeof(ListButton), new PropertyMetadata("0", OnCountChanged));
+
+        private static void OnCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            int count = 0;
+            int.TryParse(e.NewValue.ToString(), out count);
+            if (count != 0)
+            {
+                ((ListButton)d).SetValue(ListButtonVisibilityProperty, Visibility.Visible);
+            }
+            else
+            {
+                ((ListButton)d).SetValue(ListButtonVisibilityProperty, Visibility.Collapsed);
+            }
+        }
+
+        public Visibility ListButtonVisibility
+        {
+            get { return (Visibility)GetValue(ListButtonVisibilityProperty); }
+            set { SetValue(ListButtonVisibilityProperty, value); }
+        }
+
+        public static readonly DependencyProperty ListButtonVisibilityProperty =
+            DependencyProperty.Register("ListButtonVisibility", typeof(Visibility), typeof(ListButton), new PropertyMetadata(Visibility.Collapsed, null));
     }
 }

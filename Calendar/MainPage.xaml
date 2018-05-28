@@ -30,7 +30,7 @@
                 </AppBarButton.Flyout>
             </AppBarButton>
             <TextBlock Name="userName" Text="liping" Grid.Column="1" VerticalAlignment="Center"/>
-            <AppBarButton Icon="Clock" Grid.Column="2" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="2" Text="{x:Bind Weather, Mode=OneWay}" TextAlignment="Center"/>
         </Grid>
  <!--       <Grid Name="Tools" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -58,11 +58,11 @@
                 </Grid.RowDefinitions>
                 <Grid Name="searchGrid" Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="120"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name="searchBox" Grid.Column="0" BorderThickness="0, 0, 0 ,2" Margin="5, 0, 0, 0"/>
-                    <AppBarButton Icon="Find" Grid.Column="1" Click="Search_Event"/>
+                    <TextBox Name="searchBox" Height="30" Grid.Column="1" BorderThickness="0, 0, 0 ,2" />
+                    <AppBarButton Icon="Find" Grid.Column="0" Click="Search_Event"/>
                 </Grid>
                 <Grid Name="listGrid" Grid.Row="1">
 
@@ -82,7 +82,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <AppBarButton Grid.Column="0" Width="20" Name="addButton" Background="Transparent" Click="AppBarButton_Click" Content="{x:Bind openFlag,Mode=OneWay}" HorizontalAlignment="Stretch"/>
-                                        <localControls:ListButton Grid.Column="1" Width="150" Content="{x:Bind listName,Mode=OneWay}" Count="" Click="AppBarButton_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+                                        <localControls:ListButton Grid.Column="1" Width="150" Content="{x:Bind listName,Mode=OneWay}" Count="{x:Bind all_item,Mode=OneWay}" Click="AppBarButton_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
                                         
                                     </Grid>
 
@@ -97,14 +97,14 @@
                                                         <ColumnDefinition Width="80"/>
                                                     </Grid.ColumnDefinitions>
 
-                                                    <TextBlock Grid.Column="0" Text="{x:Bind Title}" HorizontalAlignment="Left" TextAlignment="Left"/>
-                                                    <TextBlock Grid.Column="2" Text="{x:Bind FormatTime}" TextAlignment="Right"/>
+                                                    <TextBlock Grid.Column="0" Text="{x:Bind Title, Mode=OneWay}" HorizontalAlignment="Left" TextAlignment="Left"/>
+                                                    <TextBlock Grid.Column="2" Text="{x:Bind FormatTime, Mode=OneWay}" TextAlignment="Right"/>
                                                 </Grid>
 
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-                                    <AppBarButton Grid.Row="2"  Width="200" Content= "{x:Bind EventName, Mode=OneWay}" HorizontalAlignment="Center" FontSize="15"/>
+                                    <AppBarButton Grid.Row="2"  Width="200" Content= "{x:Bind EventName, Mode=OneWay}" HorizontalAlignment="Center" FontSize="15" Click="Add_Or_Delete"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -128,12 +128,12 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Name: " Margin="5, 0, 0 ,0"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Date: " Margin="5, 0, 0 ,0"/>
                 <TextBox x:Name="title" Grid.Column="1" Grid.Row="0" Text="" Height="20" Width="400" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
-                <TextBox x:Name="name" Grid.Column="1" Grid.Row="1" Text="liping" Height="20" Width="400" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
+                <TextBox x:Name="name" IsReadOnly="True" Grid.Column="1" Grid.Row="1" Text="liping" Height="20" Width="400" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
                 <DatePicker x:Name="date" Grid.Column="1" Grid.Row="2" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0, 0, 0" Grid.ColumnSpan="2" Height="32"/>
 
                 <AppBarButton x:Name="delete" Grid.Column="2" Grid.Row="0" Icon="Delete" HorizontalAlignment="Center" Click="Delete_Event"/>
-                <Button x:Name="add" Grid.Column="2" Grid.Row="1" Content="+" HorizontalAlignment="Center" Click="Add_Or_Update_Event"/>
-                <AppBarButton x:Name="share" Grid.Column="2" Grid.Row="2" Icon="Share" HorizontalAlignment="Center" Click="Share_Event"/>
+                <AppBarButton x:Name="share" Grid.Column="2" Grid.Row="1" Icon="Share" HorizontalAlignment="Center" Click="Share_Event"/>
+                <AppBarButton x:Name="add" Grid.Column="2" Grid.Row="2" Content="Create" HorizontalAlignment="Center" Click="Add_Or_Update"/>
                 <Line Grid.ColumnSpan="3" Grid.Row="3" X1="0" X2="1000" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1" />
                 <TextBox BorderThickness="0, 0, 0 ,0" x:Name="detail" Grid.ColumnSpan="3" Grid.Row="4" TextWrapping="Wrap" Height="410" AcceptsReturn="True"/>
             </Grid>

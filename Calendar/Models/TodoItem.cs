@@ -9,7 +9,7 @@ namespace Calendar.Models
 {
     public class TodoItem : INotifyPropertyChanged
     {
-        
+        public event PropertyChangedEventHandler PropertyChanged;
         private string id;
         public Visibility Vis
         {
@@ -39,7 +39,20 @@ namespace Calendar.Models
                 return Services.TimeService.getFormatTime(Date);
             }
         }
-        public string Title { get; set; }
+        private string title;
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                this.title = value;
+                if(PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Title"));
+            }
+        }
         private ImageSource imageSource { get; set; }
         public string Description { get; set; }
         private bool completed;
@@ -129,7 +142,7 @@ namespace Calendar.Models
 
             this.Date = date;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+
         public string getId()
         {
             return id;
