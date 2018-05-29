@@ -64,7 +64,7 @@ namespace Calendar.database
                     date    VARCHAR( 140 ),
                     image   VARCHAR( 140 ),
                     finish  INTEGER,
-                    PRIMARY KEY(uid, id),
+                    PRIMARY KEY(name, id),
                     FOREIGN KEY(name) REFERENCES user(name)
                     ON DELETE CASCADE
                     );";
@@ -84,9 +84,8 @@ namespace Calendar.database
                     while (statement.Step() == SQLiteResult.ROW)
                     {
                         var temp = ((string)statement[4]).Split('/');
-                        var date1 = new DateTime(int.Parse(temp[2]), int.Parse(temp[0]), int.Parse(temp[1]));
+                        var date1 = new DateTime(int.Parse(temp[2]), int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[3]), int.Parse(temp[4]),0);
                         var date = new DateTimeOffset(date1);
-                        //TodoItem(string title, string description, DateTimeOffset date,string uri,string id_ = null)
                         var titem = new TodoItem((string)statement[2], (string)statement[3], date, (string)statement[5], (string)statement[0], ((Int64)statement[6]) == Int64.Parse("1") ? true : false);
                         view.Add(titem);
                     }
@@ -111,11 +110,12 @@ namespace Calendar.database
                     sql.Bind(1, id);
                     sql.Bind(2, title);
                     sql.Bind(3, content);
-                    sql.Bind(4, date.Month.ToString()+'/'+date.Day.ToString()+'/'+date.Year.ToString());
+                    sql.Bind(4, date.Month.ToString() + '/' + date.Day.ToString() + '/' + date.Year.ToString() + '/' + date.Hour.ToString() + '/' + date.Minute.ToString());
                     sql.Bind(5, imageString);
                     sql.Bind(6, -1);
                     sql.Step();
                 }
+                Background.BackgroundTask.getInstance().AddClock(id, title, content, imageString, date);
                 return true;
             }catch (Exception ex){
                 // TODO: Handle error
@@ -135,6 +135,7 @@ namespace Calendar.database
                     statement.Bind(2, name);
                     statement.Step();
                 }
+                Background.BackgroundTask.getInstance().DeleteClock(id);
                 return true;
             }
             catch (Exception ex)
@@ -153,7 +154,7 @@ namespace Calendar.database
                 {
                     statement.Bind(1, title);
                     statement.Bind(2, content);
-                    statement.Bind(3, date.Month.ToString() + '/' + date.Day.ToString() + '/' + date.Year.ToString());
+                    statement.Bind(3, date.Month.ToString() + '/' + date.Day.ToString() + '/' + date.Year.ToString() + '/' + date.Hour.ToString() + '/' + date.Minute.ToString());
                     statement.Bind(4, imageString);
                     statement.Bind(5, id);
                     statement.Bind(6, name);
