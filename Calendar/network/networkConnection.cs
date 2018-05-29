@@ -55,7 +55,7 @@ namespace Calendar.network
                 httpResponse = await httpClient.GetAsync(requestUri);
                 httpResponse.EnsureSuccessStatusCode();
                 httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                return queryString + ":" + getStringFromWeatherXMLString(httpResponseBody);
+                return getStringFromWeatherXMLString(httpResponseBody);
             }
             catch (Exception ex)
             {
@@ -79,20 +79,19 @@ namespace Calendar.network
             //遍历所有子节点
             string temperature = "";
             string weather = "";
-            string advice = "";
             foreach (IXmlNode xn in nodeList)
             {
                 XmlElement xe = (XmlElement)xn;
                 if (xe.TagName == "temperature")
                 {
-                    temperature = "\ntemperature: " + xe.InnerText;
+                    temperature = xe.InnerText;
                 }
                 else if (xe.TagName == "weather")
                 {
                     weather = "\nweather: " + xe.InnerText;
                 }
             }
-            return temperature + weather + advice;
+            return temperature;
         }
     }
 }

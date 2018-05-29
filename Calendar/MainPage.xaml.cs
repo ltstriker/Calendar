@@ -1,8 +1,10 @@
-﻿using Calendar.Models;
+﻿using Calendar.database;
+using Calendar.Models;
 using Calendar.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,6 +19,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Calendar.network;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -31,18 +34,24 @@ namespace Calendar
     {
         public View SingleView;
         bool Update_flag = false;
-        private object db;
+        private Db database = Db.GetInstance();
+        public string Weather;
+        public networkConnection net = networkConnection.getConnection();
 
-        public MainPage()
+         public MainPage()
         {
             initList();
             this.InitializeComponent();
-            
+            title.Text = "";
+            detail.Text = "";
+            date.Date = DateTime.Now;
+            Update_flag = false;
+            Weather = SingleView.Weather;
+            Debug.WriteLine("Weather: " + Weather);
         }
         public void initList()
         {
             SingleView = View.SingleView;
-            
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -73,19 +82,14 @@ namespace Calendar
                 return;
             }
             View.SingleView.Remove(SingleView.SelectedItem);
-            database.Db.GetInstance().Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
+            Update_flag = false;
+            title.Text = "";
+            detail.Text = "";
+            date.Date = DateTime.Now;
+            add.Content = "Create";
+            //            database.Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
         }
 
-        private void Add_Or_Update_Event(object sender, RoutedEventArgs e)
-        {
-            if (Update_flag)
-            {
-                //update
-            }
-            else {
-                //add
-            }
-        }
         private void OnUserItemAdding()
         {
             string ttl = title.Text;
@@ -93,7 +97,7 @@ namespace Calendar
             DateTimeOffset date_ = date.Date;
             TodoItem temp = new TodoItem(ttl, des, date_, null);
             View.SingleView.Add(temp);
-            database.Db.GetInstance().Insert(App.loginUser.username, temp.getId(),temp.Title, temp.Description, temp.Date, temp.uriPath);
+//            database.Insert(App.loginUser.username, temp.getId(),temp.Title, temp.Description, temp.Date, temp.uriPath);
         }
         private void OnUserItemUpdate()
         {
@@ -103,9 +107,9 @@ namespace Calendar
             string imgPath = View.SingleView.SelectedItem.uriPath;//modified
             View.SingleView.Update(ttl,des,date_,imgPath);
 
-            database.Db.GetInstance().Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
+/*            database.Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
                                                 ttl, des, date_, imgPath
-                                             );
+                                             );*/
         }
         private void Share_Event(object sender, RoutedEventArgs e)
         {
@@ -120,6 +124,7 @@ namespace Calendar
             date.Date = one.Date;
             detail.Text = one.Description;
             Update_flag = true;
+            add.Content = "Update";
             //
             SingleView.SelectedItem = e.ClickedItem as TodoItem;
            
@@ -135,7 +140,7 @@ namespace Calendar
             }
             string name = App.loginUser.username;
             string str = searchBox.Text;
-            database.Db.GetInstance().Search(name, str);
+            database.Search(name, str);
         }
 
         
@@ -152,11 +157,6 @@ namespace Calendar
             App.loginUser = null;
         }
 
-
-
-
-
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -172,6 +172,46 @@ namespace Calendar
             var request = args.Request;
             request.Data.Properties.Title = "Calender";
             request.Data.SetText(SingleView.SelectedItem==null?"nothind selected":SingleView.SelectedItem.Title);
+        }
+
+        async private void Add_Or_Delete(object sender, RoutedEventArgs e)
+        {
+            var itemlist = (((sender as AppBarButton).DataContext) as Group);
+            bool date_flag = false;
+            if (date.Date.Year == DateTime.Now.Year && date.Date.Month == DateTime.Now.Month && date.Date.Day == DateTime.Now.Day)
+                date_flag = true;
+            if ((string)itemlist.listName == "future")
+            {
+                if (Update_flag || title.Text != "" || detail.Text != "" || !date_flag)
+                {
+                    MessageDialog warning = new MessageDialog("确认离开当前界面？", "提示");
+
+                    warning.Commands.Add(new UICommand("确认", cmd =>
+                    {
+                        title.Text = "";
+                        detail.Text = "";
+                        date.Date = DateTime.Now;
+                        add.Content = "Create";
+                    }, commandId: 0));
+                    warning.Commands.Add(new UICommand("返回", cmd => { return; }, commandId: 1));
+                    warning.DefaultCommandIndex = 0;
+                    warning.CancelCommandIndex = 1;
+                    await warning.ShowAsync();
+                }
+            }
+            else if ((string)itemlist.listName == "finished")
+            {
+                itemlist.itemList.Clear();
+            }
+        }
+
+        private void Add_Or_Update(object sender, RoutedEventArgs e)
+        {
+            var appbarbutton = sender as AppBarButton;
+            if ((string)appbarbutton.Content == "Create")
+                OnUserItemAdding();
+            else if ((string)appbarbutton.Content == "Update")
+                OnUserItemUpdate();
         }
     }
 }
