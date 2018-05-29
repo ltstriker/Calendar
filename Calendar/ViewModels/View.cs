@@ -2,31 +2,56 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Calendar.network;
+using System.Diagnostics;
 
 namespace Calendar.ViewModels
 {
-    public class View
+    public class View : INotifyPropertyChanged
     {
-        private  static View instance;
+        public event PropertyChangedEventHandler PropertyChanged;
+        private static View instance;
         private Group future;
         private Group finished;
         private TodoItem selectedItem;
+        private networkConnection net = networkConnection.getConnection();
+        private string weather;
+        public string Weather
+        {
+            get
+            {
+                return weather;
+            }
+            set
+            {
+                weather = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Weather"));
+            }
+        }
+
         private View()
         {
             init();
         }
 
-        private void init()
+        async private void init()
         {
             Future.itemList.Add(new TodoItem("Future", "1", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Future.itemList.Add(new TodoItem("Future1", "2", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Future.all_item = 2;
             Finished.itemList.Add(new TodoItem("finished1", "3", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Finished.itemList.Add(new TodoItem("finished2", "4", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Future.listName = "future";
+            Future.EventName = "Add a New Event";
             Finished.listName = "finished";
+            Finished.EventName = "Delete All Event";
+            Weather = await net.getConnectToGetWeatherAsync("广州");
+            Debug.WriteLine("weather: " + weather);
+            Debug.WriteLine("Weather in View: " + Weather);
         }
         public static View getInstance()
         {
@@ -113,8 +138,11 @@ namespace Calendar.ViewModels
         public void Remove(TodoItem todo)
         {
             Finished.itemList.Remove(todo);
-            Future.itemList.Remove(todo);
+
+            if (Future.itemList.Remove(todo))
+                Future.all_item--;
         }
+
         public void Add(TodoItem todo)
         {
             if(todo.Completed == true)
@@ -124,6 +152,7 @@ namespace Calendar.ViewModels
             else
             {
                 Future.itemList.Add(todo);
+                Future.all_item++;
             }
         }
         public void Update(string title,string detail,DateTimeOffset date,string imgUri = null)
