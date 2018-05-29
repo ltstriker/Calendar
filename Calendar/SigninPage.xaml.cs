@@ -34,7 +34,7 @@ namespace Calendar
         {
             // Clear the Error
             UsernameError.Text = "";
-            Password.Text = "";
+            PasswordError.Text = "";
 
             string username = InputUsername.Text;
             string password = InputPassword.Password;
