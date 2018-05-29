@@ -42,6 +42,10 @@ namespace Calendar
             string password = InputPassword.Password;
             string password_repeat = InputPasswordRepeat.Password;
             int root;
+            if (comboBox.SelectionBoxItem == null)
+            {
+                return;
+            }
             if (comboBox.SelectionBoxItem.ToString() == "Normal")
             {
                 root = 0;
