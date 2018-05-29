@@ -13,7 +13,7 @@ namespace Calendar.ViewModels
         private  static View instance;
         private Group future;
         private Group finished;
-        
+        private TodoItem selectedItem;
         private View()
         {
             init();
@@ -21,10 +21,10 @@ namespace Calendar.ViewModels
 
         private void init()
         {
-            Future.itemList.Add(new TodoItem("Future", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Future.itemList.Add(new TodoItem("Future1", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Finished.itemList.Add(new TodoItem("finished1", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Finished.itemList.Add(new TodoItem("finished2", null, new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Future.itemList.Add(new TodoItem("Future", "1", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Future.itemList.Add(new TodoItem("Future1", "2", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Finished.itemList.Add(new TodoItem("finished1", "3", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
+            Finished.itemList.Add(new TodoItem("finished2", "4", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
             Future.listName = "future";
             Finished.listName = "finished";
         }
@@ -47,6 +47,11 @@ namespace Calendar.ViewModels
                 return view;
             }
         }
+        public TodoItem SelectedItem {
+            set { selectedItem = value; }
+            get { return selectedItem; }
+        }
+
         public static View SingleView
         {
             set
@@ -104,6 +109,32 @@ namespace Calendar.ViewModels
             {
 
             }
+        }
+        public void Remove(TodoItem todo)
+        {
+            Finished.itemList.Remove(todo);
+            Future.itemList.Remove(todo);
+        }
+        public void Add(TodoItem todo)
+        {
+            if(todo.Completed == true)
+            {
+                Finished.itemList.Add(todo);
+            }
+            else
+            {
+                Future.itemList.Add(todo);
+            }
+        }
+        public void Update(string title,string detail,DateTimeOffset date,string imgUri = null)
+        {
+            if (SelectedItem == null)
+                return;
+            if (imgUri != null)
+                selectedItem.uriPath = imgUri;
+            SelectedItem.Date = date;
+            SelectedItem.Title = title;
+            SelectedItem.Description = detail;
         }
     }
 }
