@@ -64,7 +64,7 @@ namespace Calendar.database
                     date    VARCHAR( 140 ),
                     image   VARCHAR( 140 ),
                     finish  INTEGER,
-                    PRIMARY KEY(uid, id),
+                    PRIMARY KEY(name, id),
                     FOREIGN KEY(name) REFERENCES user(name)
                     ON DELETE CASCADE
                     );";
