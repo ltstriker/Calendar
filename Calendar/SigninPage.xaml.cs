@@ -51,6 +51,7 @@ namespace Calendar
             {
                 //var m = new MessageDialog("用户不存在").ShowAsync();
                 UsernameError.Text = "用户不存在";
+                return;
             }
             else
             {
@@ -58,6 +59,7 @@ namespace Calendar
                 if (flag.password != password)
                 {
                     PasswordError.Text = "密码错误";
+                    return;
                 }
             }
             // check whether the password is correct
