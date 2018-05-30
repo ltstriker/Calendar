@@ -195,7 +195,9 @@ namespace Calendar
             detail.Text = "";
             date.Date = DateTime.Now;
             add.Content = "Create";
+
             database.Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
+
         }
 
         private async void OnUserItemAdding()
@@ -203,6 +205,7 @@ namespace Calendar
             string ttl = title.Text;
             string des = detail.Text;
             DateTimeOffset date_ = date.Date;
+
             bool finished = false;
             if ((string)complete.Content == "future")
                 finished = false;
@@ -230,15 +233,27 @@ namespace Calendar
                     error_date = "日期过期\n";
                     flag = 1;
                 }
+                else if (date.Date.Year > DateTime.Now.Year)
+                {
+                    flag = 0;
+                }
                 else if (date.Date.Month < DateTime.Now.Month)
                 {
                     error_date = "日期过期\n";
                     flag = 1;
                 }
+                else if(date.Date.Month > DateTime.Now.Month)
+                {
+                    flag = 0;
+                }
                 else if (date.Date.Day < DateTime.Now.Day)
                 {
                     error_date = "日期过期\n";
                     flag = 1;
+                }
+                else if(date.Date.Day >= DateTime.Now.Day)
+                {
+                    flag = 0;
                 }
             }
             if (flag == 0)
@@ -317,6 +332,8 @@ namespace Calendar
                 err.DefaultCommandIndex = 0;
                 await err.ShowAsync();
             }
+            
+
         }
         private void Share_Event(object sender, RoutedEventArgs e)
         {
@@ -351,7 +368,8 @@ namespace Calendar
             }
             string name = App.loginUser.username;
             string str = searchBox.Text;
-            database.Search(name, str);
+            string info = database.Search(name, str);
+            new MessageDialog(info).ShowAsync();
         }
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
@@ -369,6 +387,7 @@ namespace Calendar
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            View.getInstance().load();
             DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)

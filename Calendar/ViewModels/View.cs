@@ -25,20 +25,33 @@ namespace Calendar.ViewModels
         private networkConnection net = networkConnection.getConnection();
         private View()
         {
-            init();
+            load();
         }
 
-        async private void init()
+        async public void load()
         {
-            Future.itemList.Add(new TodoItem("Future", "1", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Future.itemList.Add(new TodoItem("Future1", "2", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null));
-            Future.all_item = 2;
-            Finished.itemList.Add(new TodoItem("finished1", "3", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null, true));
-            Finished.itemList.Add(new TodoItem("finished2", "4", new DateTimeOffset(2017, 8, 26, 14, 23, 56, TimeSpan.Zero), null, null, true));
+            Debug.WriteLine("loading...");
             Future.listName = "future";
-            Future.EventName = "Add a New Event";
             Finished.listName = "finished";
-            Finished.EventName = "Delete All Event";
+            if (App.loginUser == null)
+                return;
+            Group all = new Group( database.Db.GetInstance().GetAll(App.loginUser.username));
+            Finished.itemList.Clear();
+            Finished.all_item = 0;
+            Future.itemList.Clear();
+            Future.all_item = 0;
+            for(int i = 0; i < all.itemList.Count; i++)
+            {
+                if (all.itemList.ElementAt(i).Completed)
+                {
+                    Finished.itemList.Add(all.itemList.ElementAt(i));
+                }
+                else
+                {
+                    Future.itemList.Add(all.itemList.ElementAt(i));
+                }
+            }
+            Future.all_item = Future.itemList.Count;
         }
 
         public static View getInstance()
@@ -129,6 +142,7 @@ namespace Calendar.ViewModels
 
             if (Future.itemList.Remove(todo))
                 Future.all_item--;
+
             Circulation();
         }
 
