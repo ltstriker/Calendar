@@ -34,7 +34,7 @@
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
-            <TextBlock x:Name="userName" Text="liping" Grid.Column="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="userName" Text="" Grid.Column="1" VerticalAlignment="Center"/>
             <Image x:Name="image" Grid.Column="2" Width="50" Height="50" Source="Assets/cloud.png" HorizontalAlignment="Right"/>
             <TextBlock x:Name="weather_information" Grid.Column="3" Text="" TextAlignment="Right" Margin="0, 10, 10, 0" />
         </Grid>

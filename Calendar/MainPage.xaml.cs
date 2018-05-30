@@ -54,6 +54,7 @@ namespace Calendar
             this.InitializeComponent();
             initializePage();
             SingleView.Circulation();
+            userName.Text = App.loginUser.username;
 
             var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Colors.LightYellow;
@@ -121,39 +122,34 @@ namespace Calendar
                 if (xe.TagName == "temperature")
                 {
                     temperature = xe.InnerText;
-                    Debug.WriteLine(temperature);
                 }
                 else if (xe.TagName == "weather")
                 {
                     weather = xe.InnerText;
-                    Debug.WriteLine(weather);
                     if (weather.Contains("雨"))
                     {
                         Uri uri = new Uri("ms-appx:///Assets/rain.png");
                         BitmapImage bt = new BitmapImage(uri);
                         image.Source = bt;
-                        Debug.WriteLine("rain");
                     }
                     else if (weather.Contains("云"))
                     {
                         Uri uri = new Uri("ms-appx:///Assets/cloud.png");
                         BitmapImage bt = new BitmapImage(uri);
                         image.Source = bt;
-                        Debug.WriteLine("cloud");
                     }
                     else
                     {
                         Uri uri = new Uri("ms-appx:///Assets/sun.png");
                         BitmapImage bt = new BitmapImage(uri);
                         image.Source = bt;
-                        Debug.WriteLine("sun");
                     }
                 }
             }
             return temperature;
         }
 
-    public async void initializePage()
+        public async void initializePage()
         {
             title.Text = "";
             detail.Text = "";
@@ -199,7 +195,7 @@ namespace Calendar
             detail.Text = "";
             date.Date = DateTime.Now;
             add.Content = "Create";
-            //            database.Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
+            database.Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
         }
 
         private async void OnUserItemAdding()
@@ -250,7 +246,7 @@ namespace Calendar
                 TodoItem temp = new TodoItem(ttl, des, date_, null, null, finished);
                 View.SingleView.Add(temp);
                 initializePage();
-                //            database.Insert(App.loginUser.username, temp.getId(),temp.Title, temp.Description, temp.Date, temp.uriPath);
+                database.Insert(App.loginUser.username, temp.getId(),temp.Title, temp.Description, temp.Date, temp.uriPath);
             }
             else
             {
@@ -310,9 +306,8 @@ namespace Calendar
             {
                 View.SingleView.Update(ttl, des, date_, imgPath, finished);
                 initializePage();
-                //            database.Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
-                //                                                ttl, des, date_, imgPath
-                //                                             );
+                database.Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
+                                ttl, des, date_, imgPath);
             }
             else
             {
@@ -359,8 +354,6 @@ namespace Calendar
             database.Search(name, str);
         }
 
-
-
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(SigninPage));
@@ -368,7 +361,7 @@ namespace Calendar
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            // (Window.Current.Content as Frame).Navigate(typeof(SignupPage));
+            (Window.Current.Content as Frame).Navigate(typeof(SignupPage));
             App.isLogin = false;
             App.loginUser = null;
         }
