@@ -7,16 +7,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="LoginButton" Content="Login" VerticalAlignment="Top" HorizontalAlignment="Left" Height="52" Width="97" Click="LoginButton_Click" Background="#33005B68" Style="{StaticResource PivotTitleContentControlStyle}" Margin="404, 438, 0, 0"></Button>
-        <Button x:Name="SignupButton" Content="Signup" VerticalAlignment="Top" HorizontalAlignment="Left" Height="52" Width="97" Click="SignupButton_Click" Background="#33005B68" Style="{StaticResource PivotTitleContentControlStyle}" Margin="683, 441, 0, 0"></Button>
-        <TextBox x:Name="InputUsername" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="386" TextWrapping="Wrap" FontSize="20" Margin="468, 200, 0, 0"></TextBox>
-        <PasswordBox x:Name="InputPassword" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="386" FontSize="20" Margin="468, 326, 0, 0"></PasswordBox>
+    <Page.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="Assets/background.jpg"/>
+    </Page.Background>
+    
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+    <Grid  MinWidth="800" MinHeight="550">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="390"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" x:Name="LoginButton" Content="Login" VerticalAlignment="Center" HorizontalAlignment="Left" Height="52" Width="97" Click="LoginButton_Click" Background="#33005B68" Style="{StaticResource PivotTitleContentControlStyle}" ></Button>
+        <Button Grid.Row="3" Grid.Column="3" x:Name="SignupButton" Content="Signup" VerticalAlignment="Center" HorizontalAlignment="Right" Height="52" Width="97" Click="SignupButton_Click" Background="#33005B68" Style="{StaticResource PivotTitleContentControlStyle}"></Button>
+        <TextBox Grid.Row="1" Grid.Column="3" x:Name="InputUsername" VerticalAlignment="Center" HorizontalAlignment="Left" Height="60" Width="386" TextWrapping="Wrap" FontSize="20" PlaceholderText="请输入用户名"></TextBox>
+        <PasswordBox Grid.Row="2" Grid.Column="3" x:Name="InputPassword" VerticalAlignment="Center" HorizontalAlignment="Left" Height="60" Width="386" FontSize="20" PlaceholderText="请输入密码"></PasswordBox>
         
-        <TextBlock x:Name="Username" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="196" FontSize="30" Text="请输入用户名" Margin="272, 200, 0, 0"></TextBlock>
-        <TextBlock x:Name="Password" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="196" FontSize="30" Text="请输入密码" Margin="272, 326, 0, 0"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" x:Name="Username" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="196" FontSize="30" Text="请输入用户名"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2" x:Name="Password" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="196" FontSize="30" Text="请输入密码"></TextBlock>
         
-        <TextBlock x:Name="UsernameError" VerticalAlignment="Top" HorizontalAlignment="Left" Height="35" Width="386" TextWrapping="Wrap" Foreground="Red" Margin="897,216,0,0" ></TextBlock>
-        <TextBlock x:Name="PasswordError" VerticalAlignment="Top" HorizontalAlignment="Left" Height="35" Width="386" Foreground="Red" Margin="897,346,0,0"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="4" x:Name="UsernameError" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="386" TextWrapping="Wrap" Foreground="Red" ></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="4" x:Name="PasswordError" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="386" Foreground="Red"></TextBlock>
     </Grid>
+    </ScrollViewer>
 </Page>

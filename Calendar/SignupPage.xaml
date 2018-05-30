@@ -5,25 +5,47 @@
     xmlns:local="using:Calendar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Width="Auto" Height="Auto">
+    <Page.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="Assets/background.jpg"/>
+    </Page.Background>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid MinHeight="550" MinWidth="800">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" x:Name="SignupButton" Content="SignUp" HorizontalAlignment="Left" Height="44" Width="108" VerticalAlignment="Top"  Click="SignupButton_Click" Style="{StaticResource PivotTitleContentControlStyle}" Background="#33005B68" FontSize="20" ></Button>
+            <Button Grid.Row="5" Grid.Column="4" x:Name="BackButton" Content="Back" HorizontalAlignment="Right" Height="44" Width="108" VerticalAlignment="Top" Click="BackButton_Click" Style="{StaticResource PivotTitleContentControlStyle}" Background="#33005B68" FontSize="20" ></Button>
+            <TextBox Grid.Row="1" Grid.Column="4" x:Name="InputUsername" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="311" TextWrapping="Wrap" Text="" FontSize="20" PlaceholderText="请输入用户名"></TextBox>
+            <PasswordBox Grid.Row="2" Grid.Column="4" x:Name="InputPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="311" FontSize="20" PlaceholderText="请输入密码"></PasswordBox>
+            <PasswordBox Grid.Row="3" Grid.Column="4" x:Name="InputPasswordRepeat" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="311" FontSize="20"  PlaceholderText="请再次输入密码"></PasswordBox>
+            <TextBlock Grid.Row="1" Grid.Column="2" x:Name="Username" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="120" Text="Username" TextWrapping="Wrap" FontSize="20" ></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="2" x:Name="Password" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="120" Text="Password" TextWrapping="Wrap" FontSize="20" ></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="2" x:Name="PasswordRepeat" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="120" Text="Comfirm Password" TextWrapping="Wrap" FontSize="20" ></TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="2" x:Name="Root" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="120" Text="Root" TextWrapping="Wrap" FontSize="20" ></TextBlock>
 
-    <Grid Background="#FFE2DFCC">
-        <Button x:Name="SignupButton" Content="SignUp" HorizontalAlignment="Left" Height="44" Width="108" VerticalAlignment="Top"  Click="SignupButton_Click" Style="{StaticResource PivotTitleContentControlStyle}" Background="#33005B68" FontSize="20" Margin="315, 472, 0, 0"></Button>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Left" Height="44" Width="108" VerticalAlignment="Top" Click="BackButton_Click" Style="{StaticResource PivotTitleContentControlStyle}" Background="#33005B68" FontSize="20" Margin="640, 473, 0, 0"></Button>
-        <TextBox x:Name="InputUsername" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="311" TextWrapping="Wrap" Text="" FontSize="20" Margin="476, 72, 0, 0" PlaceholderText="请输入用户名"></TextBox>
-        <PasswordBox x:Name="InputPassword" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="311" FontSize="20" Margin="476, 162, 0, 0" PlaceholderText="请输入密码"></PasswordBox>
-        <PasswordBox x:Name="InputPasswordRepeat" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="311" FontSize="20" Margin="476, 269, 0, 0" PlaceholderText="请再次输入密码"></PasswordBox>
-        <TextBlock x:Name="Username" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="120" Text="Username" TextWrapping="Wrap" FontSize="20" Margin="298, 72, 0 ,0"></TextBlock>
-        <TextBlock x:Name="Password" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="120" Text="Password" TextWrapping="Wrap" FontSize="20" Margin="298, 178, 0 ,0"></TextBlock>
-        <TextBlock x:Name="PasswordRepeat" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="120" Text="Comfirm Password" TextWrapping="Wrap" FontSize="20" Margin="298, 269, 0 ,0"></TextBlock>
-        <TextBlock x:Name="Root" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="120" Text="Root" TextWrapping="Wrap" FontSize="20" Margin="298, 386, 0 ,0"></TextBlock>
-
-        <ComboBox x:Name="comboBox" VerticalAlignment="Top" HorizontalAlignment="Left" Height="47" Width="129" Margin="476, 379, 0, 0">
-            <ComboBoxItem Content="Normal"/>
-            <ComboBoxItem Content="VIP"/>
-        </ComboBox>
-        <TextBlock x:Name="UsernameError" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red" Margin="834, 72, 0, 0"></TextBlock>
-        <TextBlock x:Name="PasswordError" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red" Margin="834, 162, 0, 0"></TextBlock>
-        <TextBlock x:Name="PasswordRepeatError" VerticalAlignment="Top" HorizontalAlignment="Left" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red" Margin="834, 269, 0, 0"></TextBlock>
-    </Grid>
+            <ComboBox Grid.Row="4" Grid.Column="4" x:Name="comboBox" VerticalAlignment="Center" HorizontalAlignment="Left" Height="47" Width="129">
+                <ComboBoxItem Content="Normal"/>
+                <ComboBoxItem Content="VIP"/>
+            </ComboBox>
+            <TextBlock Grid.Row="1" Grid.Column="5" x:Name="UsernameError" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="5" x:Name="PasswordError" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red" ></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="5" x:Name="PasswordRepeatError" VerticalAlignment="Center" HorizontalAlignment="Center" Height="54" Width="246" FontSize="15" TextWrapping="Wrap" Foreground="Red"></TextBlock>
+        </Grid>
+    </ScrollViewer>
 </Page>

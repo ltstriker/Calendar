@@ -71,6 +71,7 @@ namespace Calendar.Models
                     Debug.WriteLine("property changed");
                     Debug.WriteLine("Visibility==" + Vis);
                     PropertyChanged(this, new PropertyChangedEventArgs("Vis"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("Completed"));
                 }
             }
         }
