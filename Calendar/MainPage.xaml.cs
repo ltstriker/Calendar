@@ -1,3 +1,4 @@
+﻿using Calendar.Background;
 ﻿using Calendar.database;
 using Calendar.Models;
 using Calendar.ViewModels;
@@ -59,8 +60,6 @@ namespace Calendar
             var itemlist = (((sender as AppBarButton).DataContext) as Group);
 
             itemlist.Vis = itemlist.Vis == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
-
-
         }
 
         private void ListViewItem_PointerPressed(object sender, PointerRoutedEventArgs e)
