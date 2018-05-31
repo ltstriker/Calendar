@@ -285,12 +285,17 @@ namespace Calendar.database
                             if (item.Completed == false && DateTimeOffset.Now.CompareTo(item.Date) <= 0)
                             {
                                 Background.BackgroundTask.getInstance().AddClock(item.getId(), item.Title, item.Description, item.uriPath, item.Date);
+
                             }
                         }
+                        Debug.WriteLine("log in correct");
+                        Debug.WriteLine("statement[1]" +name);
                         return true;
+
                     }
                     else
                     {
+                        Debug.WriteLine("login error");
                         return false;
                     }
                 }
