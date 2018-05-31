@@ -273,6 +273,16 @@ namespace Calendar.database
             var db = this.conn;
             try
             {
+                using (var statement = db.Prepare("select * from user where name = ? AND pwd = ?"))
+                {
+                    statement.Bind(1, name);
+                    statement.Bind(2, pwd);
+                    if (statement.Step() != SQLiteResult.ROW)
+                    {
+                        return false;
+                    }
+                }
+
                 using (var statement = db.Prepare("UPDATE user SET state = 1 WHERE name = ? AND pwd = ?"))
                 {
                     statement.Bind(1, name);
