@@ -206,7 +206,7 @@ namespace Calendar
             string ttl = title.Text;
             string des = detail.Text;
             DateTimeOffset date_ = date.Date;
-            date_ = new DateTimeOffset(date_.Year, date_.Month, date_.Day, time.Time.Hours, time.Time.Minutes,time.Time.Seconds,TimeSpan.Zero);
+            date_ = new DateTimeOffset(date_.Year, date_.Month, date_.Day, time.Time.Hours, time.Time.Minutes,time.Time.Seconds,new TimeSpan(8,0,0));
 
             bool finished = false;
             if ((string)complete.Content == "future")
