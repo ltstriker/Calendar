@@ -101,8 +101,6 @@ namespace Calendar.database
                         Boolean t = ((Int64)statement[6]) == Int64.Parse("1") ? true : false;
                         Debug.WriteLine("t==" + t);
                         var  titem = new TodoItem(ttitle, tdes, date, timage, tid, t);
-                        /*public TodoItem(string title, string description, DateTimeOffset date,string uri,string id_,bool finished = false)
-        {*/
                         view.Add(titem);
                         // view.Add(null);
                         Debug.WriteLine("hello");
@@ -136,7 +134,7 @@ namespace Calendar.database
                     sql.Bind(7, -1);
                     sql.Step();
                 }
-                Background.BackgroundTask.getInstance().AddClock(id, title, content, imageString, date);
+                Background.BackgroundTask.getInstance().AddClock(id, title, content, imageString, date, name);
                 return true;
             }catch (Exception){
                 // TODO: Handle error
@@ -205,6 +203,18 @@ namespace Calendar.database
                 if(finish)
                 {
                     Background.BackgroundTask.getInstance().DeleteClock(id);
+                }
+                else
+                {
+                    var collection = GetAll(name);
+                    foreach (var item in collection)
+                    {
+                        if(item.getId() == id && DateTimeOffset.Now.CompareTo(item.Date) <= 0)
+                        {
+                            Background.BackgroundTask.getInstance().AddClock(item.getId(), item.Title, item.Description, item.uriPath, item.Date, name);
+                            break;
+                        }
+                    } 
                 }
                 return true;
             }
@@ -294,7 +304,8 @@ namespace Calendar.database
                         {
                             if (item.Completed == false && DateTimeOffset.Now.CompareTo(item.Date) <= 0)
                             {
-                                Background.BackgroundTask.getInstance().AddClock(item.getId(), item.Title, item.Description, item.uriPath, item.Date);
+
+                                Background.BackgroundTask.getInstance().AddClock(item.getId(), item.Title, item.Description, item.uriPath, item.Date, name);
 
                             }
                         }
