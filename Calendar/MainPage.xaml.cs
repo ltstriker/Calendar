@@ -197,7 +197,9 @@ namespace Calendar
             date.Date = DateTime.Now;
             add.Content = "Create";
 
+
             database.Remove(App.loginUser.username, View.SingleView.SelectedItem.getId());
+
 
         }
 
@@ -206,6 +208,7 @@ namespace Calendar
             string ttl = title.Text;
             string des = detail.Text;
             DateTimeOffset date_ = date.Date;
+
 
             bool finished = false;
             if ((string)complete.Content == "future")
@@ -274,6 +277,7 @@ namespace Calendar
             }
             }
         private async void OnUserItemUpdate()
+
         {
             string ttl = title.Text;
             string des = detail.Text;
@@ -336,6 +340,7 @@ namespace Calendar
             }
             
 
+
         }
         private void Share_Event(object sender, RoutedEventArgs e)
         {
@@ -372,8 +377,10 @@ namespace Calendar
             string name = App.loginUser.username;
             string str = searchBox.Text;
             string info = database.Search(name, str);
+
             info += "view.count" + View.SingleView.Finished.itemList.Count;
             new MessageDialog(info).ShowAsync();
+
 
         }
 
@@ -393,7 +400,9 @@ namespace Calendar
         {
             base.OnNavigatedTo(e);
             View.getInstance().load();
+
             name.Text = App.loginUser.username;
+
             DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)

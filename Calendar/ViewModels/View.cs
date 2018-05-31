@@ -30,9 +30,11 @@ namespace Calendar.ViewModels
 
         async public void load()
         {
-            Debug.WriteLine("loading...");
+
+
             Future.listName = "future";
             Finished.listName = "finished";
+
             Future.EventName = "Add";
             Finished.EventName = "Delete All";
             if (App.loginUser == null)
@@ -146,7 +148,9 @@ namespace Calendar.ViewModels
             if (Future.itemList.Remove(todo))
                 Future.all_item--;
 
+
             Circulation();
+
         }
 
         public void Add(TodoItem todo)
