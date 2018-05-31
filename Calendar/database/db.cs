@@ -101,18 +101,21 @@ namespace Calendar.database
                         Boolean t = ((Int64)statement[6]) == Int64.Parse("1") ? true : false;
                         Debug.WriteLine("t==" + t);
                         var  titem = new TodoItem(ttitle, tdes, date, timage, tid, t);
-
+                        /*public TodoItem(string title, string description, DateTimeOffset date,string uri,string id_,bool finished = false)
+        {*/
                         view.Add(titem);
-                       // view.Add(null);
+                        // view.Add(null);
                         Debug.WriteLine("hello");
                     }
                     Debug.WriteLine("after while..");
                 }
+                
                 return view;
             }
             catch (Exception ex)
             {
                 // TODO: Handle error
+                Debug.WriteLine("in database: view.count" + view.Count);
                 return view;
             }
         }

@@ -110,7 +110,7 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-                                    <AppBarButton Grid.Row="2"  Width="200" Content= "{x:Bind EventName, Mode=OneWay}" HorizontalAlignment="Center" FontSize="15" Click="Add_Or_Delete"/>
+                                    <AppBarButton Grid.Row="2"  Width="200" Content= "{x:Bind EventName, Mode=OneWay}"  HorizontalAlignment="Center" FontSize="15" Click="Add_Or_Delete"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -135,7 +135,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Name: " Margin="5, 0, 0 ,0"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Date: " Margin="5, 0, 0 ,0"/>
                 <TextBox x:Name="title" Background="Transparent" Grid.Column="1" Grid.Row="0" Text="" Height="20" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
-                <TextBox x:Name="name" Background="Transparent" IsReadOnly="True" Grid.Column="1" Grid.Row="1" Text="liping" Height="20" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
+                <TextBox x:Name="name" Background="Transparent" IsReadOnly="True" Grid.Column="1" Grid.Row="1" Text="" Height="20" VerticalAlignment="Top" Margin="10, 0, 0 ,0" BorderThickness="0, 0, 0 ,2"/>
                 <DatePicker x:Name="date" Background="Transparent" Grid.Column="1" Grid.Row="2" Width="440" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0, 0, 0" Grid.ColumnSpan="2" Height="32"/>
 
                 <AppBarButton x:Name="delete" Grid.Column="2" Grid.Row="0" Icon="Delete" HorizontalAlignment="Center" Click="Delete_Event"/>

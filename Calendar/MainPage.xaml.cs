@@ -156,6 +156,7 @@ namespace Calendar
             date.Date = DateTime.Now;
             Update_flag = false;
             complete.Content = "future";
+            //add.Content = "create";
             await getConnectToGetWeatherAsync("广州");
         }
 
@@ -321,6 +322,7 @@ namespace Calendar
             {
                 View.SingleView.Update(ttl, des, date_, imgPath, finished);
                 initializePage();
+                add.Content = "create";
                 database.Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
                                 ttl, des, date_, imgPath);
             }
@@ -361,6 +363,7 @@ namespace Calendar
         private void Search_Event(object sender, RoutedEventArgs e)
         {
             //search
+
             if (App.isLogin == false)
             {
                 new MessageDialog("not login!").ShowAsync();
@@ -369,7 +372,9 @@ namespace Calendar
             string name = App.loginUser.username;
             string str = searchBox.Text;
             string info = database.Search(name, str);
+            info += "view.count" + View.SingleView.Finished.itemList.Count;
             new MessageDialog(info).ShowAsync();
+
         }
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
@@ -388,6 +393,7 @@ namespace Calendar
         {
             base.OnNavigatedTo(e);
             View.getInstance().load();
+            name.Text = App.loginUser.username;
             DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
