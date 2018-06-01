@@ -87,7 +87,7 @@ namespace Calendar.Background
 
                 for (int i = 0, len = scheduled.Count; i < len; i++)
                 {
-                    if (scheduled[i].Id == toast_id)
+                    if (scheduled[i].Id == toast_id.Substring(0, 15))
                     {
                         notifier.RemoveFromSchedule(scheduled[i]);
                     }

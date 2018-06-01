@@ -178,6 +178,8 @@ namespace Calendar.database
                     statement.Bind(5, id);
                     statement.Bind(6, name);
                     statement.Step();
+                    Background.BackgroundTask.getInstance().DeleteClock(id);
+                    Background.BackgroundTask.getInstance().AddClock(id, title, content, imageString, date, name);
                     return true;
                 }
             }
