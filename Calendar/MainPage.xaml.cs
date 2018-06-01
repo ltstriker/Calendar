@@ -157,7 +157,7 @@ namespace Calendar
             time.Time = new TimeSpan(DateTimeOffset.Now.Hour,DateTimeOffset.Now.Minute,DateTimeOffset.Now.Second);
             Update_flag = false;
             complete.Content = "future";
-            //add.Content = "create";
+            add.Content = "Create";
             await getConnectToGetWeatherAsync("广州");
         }
 
@@ -223,12 +223,12 @@ namespace Calendar
                 error_title = "未填写Title\n";
                 flag = 1;
             }
-            if (detail.Text == "")
+            else if (detail.Text == "")
             {
                 error_detail = "未填写Detail\n";
                 flag = 1;
             }
-            if (!finished)
+            else if (!finished)
             {
                 if (date.Date.Year < DateTime.Now.Year)
                 {
@@ -340,7 +340,7 @@ namespace Calendar
             {
                 View.SingleView.Update(ttl, des, date_, imgPath, finished);
                 initializePage();
-                add.Content = "create";
+                add.Content = "Create";
                 database.Update(App.loginUser.username, View.SingleView.SelectedItem.getId(),
                                 ttl, des, date_, imgPath);
             }
